@@ -1,0 +1,36 @@
+# Exam Recall 配置文件
+# 开源版本 - 请根据实际环境修改
+
+# 服务器配置
+server:
+  host: "127.0.0.1"
+  port: 8964
+
+# 数据库配置
+database:
+  path: "data/szyf.db"
+
+# 输出目录
+output:
+  dir: "output"
+
+# Gradio 主题 (Soft, Glass, Ocean, Monochrome, Default)
+ui:
+  theme: "Ocean"
+  title: "题库管理系统"
+
+# SSL 证书配置 (可选，用于 HTTPS)
+ssl:
+  certfile: "./cert.pem"
+  keyfile: "./key.pem"
+
+# 抽题配置
+selector:
+  default_count: 20
+  min_count: 5
+  max_count: 200
+
+# 字体配置 (PDF 生成用)
+font:
+  path: "msyh.ttc"
+  name: "MicrosoftYaHei"

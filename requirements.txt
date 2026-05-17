@@ -1,0 +1,8 @@
+# requirements.txt
+# Exam Recall - 个人题库管理系统
+
+# 核心依赖
+gradio>=5.0.0          # Web 界面框架
+reportlab>=4.0.0       # PDF 生成
+pyyaml>=6.0.0          # YAML 解析
+watchdog>=3.0.0      # Gradio 热重载增强

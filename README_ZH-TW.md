@@ -1,6 +1,3 @@
-### README_ZH-TW.md（繁体中文）
-
-```markdown
 # Exam Recall 📚
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)

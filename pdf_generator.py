@@ -126,8 +126,10 @@ class PDFGenerator:
         )
         self.doc.addPageTemplates([template])
 
-    def _canvasmaker(self):
-        return NumberedCanvas(font_name=self.font_name)
+    def _canvas_factory(self):
+        """返回一个适配 BaseDocTemplate 的 canvas 工厂函数"""
+        font_name = self.font_name
+        return lambda *args, **kwargs: NumberedCanvas(*args, font_name=font_name, **kwargs)
 
     def format_question(self, q: Dict, index: int) -> List:
         paragraphs = []
@@ -145,7 +147,7 @@ class PDFGenerator:
 
     def format_grade_item(self, result: Dict, index: int) -> List:
         paragraphs = []
-        icon = "✓" if result["is_correct"] else "✗"
+        icon = "\u2713" if result["is_correct"] else "\u2717"
         correct_ans = result.get("correct_answer", "")
         q_type = "[多选]" if len(correct_ans) > 1 else "[单选]"
         paragraphs.append(Paragraph(f"ID: {result['id']} {q_type} {icon}", self.id_style))
@@ -174,7 +176,7 @@ class PDFGenerator:
         story.append(Spacer(1, 6))
         for i, q in enumerate(questions, 1):
             story.extend(self.format_question(q, i))
-        self.doc.build(story, canvasmaker=self._canvasmaker)
+        self.doc.build(story, canvasmaker=self._canvas_factory())
         return self.output_path
 
 
@@ -202,7 +204,7 @@ def generate_grade_report(
     story.append(Spacer(1, 6))
     for i, r in enumerate(results, 1):
         story.extend(generator.format_grade_item(r, i))
-    generator.doc.build(story, canvasmaker=generator._canvasmaker)
+    generator.doc.build(story, canvasmaker=generator._canvas_factory())
     return output_path
 
 
